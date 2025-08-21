@@ -9,10 +9,10 @@ As a short reprieve from HTML/CSS/JS/React/Redux, I had an idea to create a simp
 - add new tasks
 - remove tasks
 - modify already added tasks
+- theme colour changes - for now 7 colors
 
 ## Work in progress (available in the future):
 - dark/light theme
-- accent colour changes
 - different views for tasks
 - task categories
 - font type and size change
