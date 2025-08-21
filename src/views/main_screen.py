@@ -30,8 +30,14 @@ class BottomSheet:
 
 class MainScreen:
     def update_task_widgets(self):
-        self.task_list = load_database()
-        print(self.task_list)
+        checkbox = ft.Checkbox(
+            overlay_color = self.page.theme.color_scheme.primary,
+            fill_color = {
+                ft.ControlState.DEFAULT: ft.Colors.WHITE},
+            check_color = self.page.theme.color_scheme.primary,
+            focus_color = self.page.theme.color_scheme.primary,
+            border_side=ft.BorderSide(2, color=self.page.theme.color_scheme.primary))
+        self.task_list = load_tasks()
         self.list_container.controls = []
         for item in self.task_list:
             task_id = item[0]
@@ -42,8 +48,7 @@ class MainScreen:
                 data=task_data, 
                 title=ft.Text(task_title), 
                 subtitle=ft.Text(task_date), 
-                trailing=ft.Checkbox(), 
-                bgcolor=ft.Colors.GREY, 
+                trailing=checkbox,
                 on_long_press=lambda e, tid=task_id: self.open_bottom_sheet(tid))
                                               
             self.list_container.controls.append(current_task_widget)
@@ -53,14 +58,16 @@ class MainScreen:
         for control in self.list_container.controls[:]:
             if control.data and control.data[0] == task_id:
                     self.list_container.controls.remove(control)
-
         self.page.update()
 
     def __init__(self, page: ft.Page):
         initialise_database()
         self.page = page
-        self.task_list = load_database()
-        self.list_container = ft.ListView(controls=[])
+        self.settings = load_settings()
+        print(self.settings)
+        self.page.theme = themes[self.settings[0][1]]
+        self.list_container = ft.ListView(controls = [], expand = True)
+        page.update()
 
     def open_bottom_sheet(self, task_id):
         bottom_sheet = BottomSheet(self.page, task_id=task_id, main_screen=self)
@@ -75,29 +82,32 @@ class MainScreen:
         return ft.View(
             route="/main_screen",
             controls=[
-                ft.AppBar(title=ft.Text(f'Hello, today is {current_date.strftime("%d/%m/%Y")}'), 
-                    center_title=True,
-                    bgcolor=ft.Colors.BLACK,
-                    color=ft.Colors.WHITE,
-                    actions=[
+                ft.AppBar(title = ft.Text(f'Hello, today is {current_date.strftime("%d/%m/%Y")}'), 
+                    bgcolor = self.page.theme.color_scheme.primary,
+                    center_title = True,
+                    actions = [
                         ft.IconButton(
-                        icon=ft.Icons.SETTINGS,
-                        on_click=lambda _: self.page.go("/settings"))]),
+                        icon = ft.Icons.SETTINGS,
+                        on_click = lambda _: self.page.go("/settings"))]),
                 ft.Container(
-                    content = self.list_container, 
-                    expand = True),
-                ft.NavigationBar(
-                    bgcolor=ft.Colors.BLACK, 
-                    destinations=[
-                            ft.NavigationBarDestination(icon=ft.Icons.ADD),
-                            ft.NavigationBarDestination(icon=ft.Icons.MENU),
+                    content = self.list_container,
+                    bgcolor = self.page.theme.color_scheme.background,
+                    height = self.page.height
+                    ),
+                ft.NavigationBar( 
+                    bgcolor = self.page.theme.color_scheme.primary,
+                    destinations = [
+                            ft.NavigationBarDestination(icon = ft.Icons.ADD),
+                            ft.NavigationBarDestination(icon = ft.Icons.MENU),
                         ])],
-                        floating_action_button=ft.FloatingActionButton(
-                             icon=ft.Icons.ADD,
-                             bgcolor = ft.Colors.BLACK,
-                             data=0,
-                             on_click=lambda _: self.page.go("/new_task")),
-                             vertical_alignment=ft.MainAxisAlignment.START
+                        floating_action_button = ft.FloatingActionButton(
+                             icon = ft.Icons.ADD,
+                             data = 0,
+                             on_click = lambda _: self.page.go("/new_task")),
+                             vertical_alignment = ft.MainAxisAlignment.START,
+                             horizontal_alignment= ft.CrossAxisAlignment.STRETCH,
+                             padding = 0,
+                             bgcolor = self.page.theme.color_scheme.secondary
         )
 
 def main(page: ft.Page):

@@ -51,8 +51,6 @@ class NewTask:
                 ft.AppBar(
                     title=ft.Text(f'New task'), 
                     center_title=True,
-                    bgcolor=ft.Colors.BLACK,
-                    color=ft.Colors.WHITE,
                     actions=[
                         ft.IconButton(icon=ft.Icons.ARROW_BACK, on_click=lambda _: self.page.go("/main_screen")),
                         ft.IconButton(icon=ft.Icons.DONE, on_click=lambda _:self.add_task_database())]),
