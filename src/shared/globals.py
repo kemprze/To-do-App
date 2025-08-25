@@ -77,6 +77,79 @@ ft.Theme(
     )
 )]
 
+dark_themes = [
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#400917",
+            secondary="#5a0f28",
+            background="#200415",
+            surface="#2a0612",
+            on_primary="#ffccd9",   # lighter tint of scarlet
+            on_secondary="#ffe0e6"  # slightly lighter
+        )
+    ),
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#000033",
+            secondary="#000066",
+            background="#000022",
+            surface="#00001a",
+            on_primary="#ccccff",   # lighter blue text
+            on_secondary="#e0e0ff"
+        )
+    ),
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#332e00",
+            secondary="#554400",
+            background="#201a00",
+            surface="#1a1700",
+            on_primary="#ffffcc",   # lighter amber text
+            on_secondary="#ffffe0"
+        )
+    ),
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#003300",
+            secondary="#006600",
+            background="#002000",
+            surface="#001a00",
+            on_primary="#ccffcc",   # lighter green text
+            on_secondary="#e0ffe0"
+        )
+    ),
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#1a0033",
+            secondary="#330066",
+            background="#1a001a",
+            surface="#0d001a",
+            on_primary="#e6ccff",   # lighter purple text
+            on_secondary="#f0e0ff"
+        )
+    ),
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#33001a",
+            secondary="#660033",
+            background="#33000f",
+            surface="#1a0010",
+            on_primary="#ffccff",   # lighter pink text
+            on_secondary="#ffe0ff"
+        )
+    ),
+    ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary="#331900",
+            secondary="#664c00",
+            background="#201000",
+            surface="#1a0d00",
+            on_primary="#ffddb3",   # lighter orange text
+            on_secondary="#ffe6cc"
+        )
+    )
+]
+
 def update_task_db(task_container):
     connection = sqlite3.connect("database.db")
     cursor = connection.cursor()

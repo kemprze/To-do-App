@@ -16,11 +16,11 @@ class ModifyTask:
         print(self.selected_task)
 
         self.list_container = ft.ListView(controls=[])
-        self.task_name = ft.TextField(label="Task name", value=self.selected_task[1])
-        self.is_urgent = ft.Switch(label="Urgent?", value=self.selected_task[2])
-        self.description = ft.TextField(label="Description", value=self.selected_task[3])
+        self.task_name = ft.TextField(label="Task name", value=self.selected_task[1], label_style=ft.TextStyle(color=self.page.theme.color_scheme.on_primary), border_color=self.page.theme.color_scheme.on_primary, color=self.page.theme.color_scheme.on_primary)
+        self.is_urgent = ft.Switch(label="Urgent?", value=self.selected_task[2], label_style=ft.TextStyle(color=self.page.theme.color_scheme.on_primary))
+        self.description = ft.TextField(label="Description", value=self.selected_task[3], label_style=ft.TextStyle(color=self.page.theme.color_scheme.on_primary), border_color=self.page.theme.color_scheme.on_primary, color=self.page.theme.color_scheme.on_primary)
         self.time_created = self.selected_task[4]
-        self.due_on = ft.TextField(label="Due date: ", value=self.selected_task[5], on_click=self.open_date_picker)
+        self.due_on = ft.TextField(label="Due date: ", value=self.selected_task[5], on_click=self.open_date_picker, label_style=ft.TextStyle(color=self.page.theme.color_scheme.on_primary), border_color=self.page.theme.color_scheme.on_primary, color=self.page.theme.color_scheme.on_primary)
 
         self.datepicker = ft.DatePicker(
             first_date=datetime.datetime(2000, 1, 1),
@@ -80,7 +80,8 @@ class ModifyTask:
                                     self.is_urgent,
                                     self.description,
                                     self.due_on])
-                        ])
+                        ],
+                        bgcolor=self.page.theme.color_scheme.background)
 
 
 
